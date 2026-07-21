@@ -5,7 +5,7 @@ import { Heart, Sparkles } from "lucide-react";
 export default function Footer() {
   return (
     <footer className="py-6 mt-20 border-t border-gray-200 bg-white">
-<div className="mx-auto flex w-full flex-col items-center justify-between gap-5 px-12 py-6 text-sm text-gray-600 md:flex-row">        <div className="flex items-center gap-2">
+<div className="mx-auto flex w-full flex-col items-center justify-between gap-5 px-24 py-6 text-sm text-gray-600 md:flex-row">        <div className="flex items-center gap-2">
           <Sparkles className="h-4 w-4 text-indigo-600" />
           <span className="font-medium">
             © {new Date().getFullYear()} All rights reserved.
@@ -20,7 +20,8 @@ export default function Footer() {
         </div>
 
         {/* Right */}
-        <a
+
+        {/* <a
           href="https://github.com/nishant1194/"
           target="_blank"
           rel="noopener noreferrer"
@@ -36,7 +37,8 @@ export default function Footer() {
           </svg>
 
           <span>View on GitHub</span>
-        </a>
+        </a> */}
+
       </div>
     </footer>
   );
