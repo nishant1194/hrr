@@ -9,6 +9,7 @@ import History from "./components/History";
 
 import { Quote } from "./types/quote";
 import { generateQuote } from "./services/quoteService";
+import Footer from "./components/Footer";
 
 export default function Home() {
   const [currentQuote, setCurrentQuote] = useState<Quote | null>(null);
@@ -55,9 +56,9 @@ export default function Home() {
 
         </div>
 
-        <History history={history} />
-
+        {/* <History history={history} /> */}
       </div>
+<Footer />
     </main>
   );
 }

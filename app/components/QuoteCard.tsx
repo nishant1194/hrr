@@ -101,6 +101,13 @@ export default function QuoteCard({ quote }: Props) {
             )}
           </button>
 
+          {/* <button
+            className="flex items-center gap-2 rounded-xl border border-white/30 px-5 py-3 transition hover:bg-white/10"
+          >
+            <RefreshCw size={18} />
+            Regenerate
+          </button> */}
+
         </div>
 
       </div>
