@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 
-import Sidebar from "./components/Sidebar";
 import QuoteForm from "./components/QuoteForm";
 import QuoteCard from "./components/QuoteCard";
 import History from "./components/History";
@@ -43,8 +42,6 @@ export default function Home() {
 
   return (
     <main className="flex h-screen bg-slate-100">
-
-      <Sidebar />
 
       <section className="flex-1 overflow-y-auto">
 
