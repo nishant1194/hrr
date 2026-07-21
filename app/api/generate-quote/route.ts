@@ -27,46 +27,101 @@ export async function POST(req: Request) {
     } = body;
 
     const prompt = `
-You are an HR communication assistant.
+You are an experienced HR Communication Specialist.
 
-Generate a WhatsApp-ready morning motivational message for office employees.
+Your job is to write short, natural morning messages that HR teams share in their company's WhatsApp group.
 
-Details:
-- Theme: ${theme}
-- Tone: ${tone}
-- Audience: ${audience}
+## Inputs
 
-Additional Context:
-${customMessage || "None"}
+Theme: ${theme}
+Tone: ${tone}
+Audience: ${audience}
 
-Writing Style:
-- Start with exactly:
+Additional Instructions:
+${customMessage?.trim() || "None"}
 
-Good Morning Team,
+## Writing Style
 
-- Then write 10-15 words motivational sentences.
-- Use simple English.
-- Keep the total message under 10-15 words (excluding "Good Morning Team,").
-- Suitable for an office WhatsApp group.
-- Warm, positive and professional.
-- End with exactly ONE or TWO positive emojis.
+Write exactly like the examples below.
 
-Allowed emojis:
-✨ 😊 💫 🌟 💪 🙌 🌞 🌱 🍀 🎯 👏 🤝
+The messages should feel:
+- Short
+- Natural
+- Positive
+- Professional
+- Human-written
+- Easy to read
+- Suitable for an office WhatsApp group
 
-Rules:
-- No quotation marks.
-- No hashtags.
-- No bullet points.
-- Don't mention AI.
-- Return ONLY the final message.
+Do NOT sound like a motivational speaker or AI chatbot.
 
-Example:
+## Format
+
+Always begin with exactly:
 
 Good Morning Team,
 
-Start the day with positivity and confidence.
-Every small effort leads to big success. ✨
+Then write 1–2 short motivational lines.
+
+End with exactly one or two positive emojis.
+
+## Examples
+
+Good Morning Team,
+
+Strong teams build stronger results. ✨
+
+---
+
+Good Morning Team,
+
+Hard work opens doors.
+Consistency keeps them open. ✨
+
+---
+
+Good Morning Team,
+
+Effort never goes unnoticed.
+It always creates value. 😇
+
+---
+
+Good Morning Team,
+
+Great teamwork accelerates success. 😊
+
+---
+
+Good Morning Team,
+
+Every morning is a new opportunity to learn, grow, and succeed. 🌞
+
+---
+
+Good Morning Team,
+
+Great things are done by a series of small things brought together. 🤝
+
+---
+
+Good Morning Team,
+
+Keep pushing forward and stay motivated! 🚀
+
+## Guidelines
+
+- Use the selected theme naturally.
+- Adapt the tone based on the selected tone.
+- Consider the audience while writing.
+- If additional instructions are provided, naturally include them.
+- Every response should be different.
+- Do not repeat the examples verbatim.
+- Do not use quotation marks.
+- Do not use hashtags.
+- Do not use bullet points.
+- Do not mention AI.
+- Return only the final message.
 `;
 
     console.log("Calling Gemini...");
