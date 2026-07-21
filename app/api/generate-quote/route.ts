@@ -1,18 +1,30 @@
 import { GoogleGenAI } from "@google/genai";
 import { NextResponse } from "next/server";
 
+const apiKey = process.env.GEMINI_API_KEY;
+
+if (!apiKey) {
+  throw new Error(
+    "GEMINI_API_KEY is missing. Please add it to your .env.local file."
+  );
+}
+
 const ai = new GoogleGenAI({
-  apiKey: process.env.GEMINI_API_KEY!,
+  apiKey,
 });
 
 export async function POST(req: Request) {
   try {
+    const body = await req.json();
+
+    console.log("Incoming Request:", body);
+
     const {
-      theme,
-      tone,
-      audience,
-      customMessage,
-    } = await req.json();
+      theme = "",
+      tone = "",
+      audience = "",
+      customMessage = "",
+    } = body;
 
     const prompt = `
 You are an HR communication assistant.
@@ -29,30 +41,27 @@ ${customMessage || "None"}
 
 Writing Style:
 - Start with exactly:
+
 Good Morning Team,
 
 - Then write 1 or 2 short motivational sentences.
-
-- Use very simple English.
-
+- Use simple English.
 - Keep the total message under 30 words (excluding "Good Morning Team,").
+- Suitable for an office WhatsApp group.
+- Warm, positive and professional.
+- End with exactly ONE or TWO positive emojis.
 
-- Make it suitable for sharing in an office WhatsApp group.
-
-- The message should feel warm, positive, and professional.
-
-- End with exactly ONE or two relevant positive emoji such as:
-✨ 😊 💫 🌟 💪 🙌 🌞 🌱 🍀 🎯 👏 🤝 
+Allowed emojis:
+✨ 😊 💫 🌟 💪 🙌 🌞 🌱 🍀 🎯 👏 🤝
 
 Rules:
-- Do not use quotation marks.
-- Do not use hashtags.
-- Do not use bullet points.
-- Do not mention AI.
-- Do not explain anything.
-- Return only the final message.
+- No quotation marks.
+- No hashtags.
+- No bullet points.
+- Don't mention AI.
+- Return ONLY the final message.
 
-Example format:
+Example:
 
 Good Morning Team,
 
@@ -60,20 +69,32 @@ Start the day with positivity and confidence.
 Every small effort leads to big success. ✨
 `;
 
+    console.log("Calling Gemini...");
+
     const response = await ai.models.generateContent({
       model: "gemini-2.5-flash",
       contents: prompt,
     });
 
+    console.log("Gemini Response:", response);
+
     return NextResponse.json({
-      quote: response.text,
+      quote: response.text ?? "",
     });
   } catch (error) {
+    console.error("========== GEMINI ERROR ==========");
     console.error(error);
+
+    let message = "Unknown error";
+
+    if (error instanceof Error) {
+      message = error.message;
+    }
 
     return NextResponse.json(
       {
-        error: "Failed to generate quote",
+        success: false,
+        error: message,
       },
       {
         status: 500,
