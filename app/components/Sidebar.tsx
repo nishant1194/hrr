@@ -2,12 +2,12 @@
 
 import { useState } from "react";
 
-import QuoteForm from "./components/QuoteForm";
-import QuoteCard from "./components/QuoteCard";
-import History from "./components/History";
+import QuoteForm from "./QuoteForm";
+import QuoteCard from "./QuoteCard";
+import History from "./History";
 
-import { Quote } from "./types/quote";
-import { generateQuote } from "./services/quoteService";
+import { Quote } from "../types/quote";
+import { generateQuote } from "../services/quoteService";
 
 export default function Home() {
   const [currentQuote, setCurrentQuote] =
