@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "QuoteAI",
-  description: "Generated motivational messages by AI",
+  description: "Generate AI-powered motivational messages",
 };
 
 export default function RootLayout({
